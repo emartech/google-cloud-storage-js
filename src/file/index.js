@@ -1,5 +1,7 @@
 'use strict';
 
+const FileError = require('./error');
+
 process.env.SUPPRESS_NO_CONFIG_WARNING = 'y';
 
 const GoogleCloud = require('google-cloud');
@@ -10,9 +12,20 @@ const GCS_URI_REGEXP = /^gs:\/\/([a-z0-9_.\-]+)\/(.+)$/;
 
 class File {
 
-  static create(filename) {
-    const storage = GoogleCloud.storage(config.get('GoogleCloud'));
+  static create(filename, projectId = null) {
+    const googleCloudConfig = Object.assign({}, config.get('GoogleCloud'));
+    let overrideDefaultProjectId = false;
+
+    if (projectId && projectId !== googleCloudConfig.projectId) {
+      googleCloudConfig.projectId = projectId;
+      overrideDefaultProjectId = true;
+    }
+    const storage = GoogleCloud.storage(googleCloudConfig);
     const { bucket, file } = this._parseAsResource(filename);
+
+    if (overrideDefaultProjectId && !bucket) {
+      throw new FileError('You should use fully qualified file path, when overriding default projectId.');
+    }
 
     return (bucket && file) ?
       storage.bucket(bucket).file(file) :
