@@ -16,7 +16,7 @@
     "url": "git+https://github.com/emartech/google-cloud-storage-js.git"
   },
   "author": "Emarsys",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/emartech/google-cloud-storage-js/issues"
   },
