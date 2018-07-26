@@ -1,20 +1,17 @@
 'use strict';
 
-const GoogleCloud = require('google-cloud');
+const GoogleCloudStorage = require('@google-cloud/storage');
 const File = require('./index');
 const FileError = require('./error');
 
 
 describe('File', function() {
   let bucketStub;
-  let storageStub;
-
 
   beforeEach(function() {
     bucketStub = { file: this.sandbox.stub().returns('[gcs file]') };
-    storageStub = { bucket: this.sandbox.stub().returns(bucketStub) };
 
-    this.sandbox.stub(GoogleCloud, 'storage').returns(storageStub);
+    this.sandbox.stub(GoogleCloudStorage.prototype, 'bucket').returns(bucketStub);
   });
 
 
@@ -27,13 +24,8 @@ describe('File', function() {
           file = File.create('path/to/file.ext');
         });
 
-        it('should instantiate a Storage instance with proper config', function() {
-          expect(GoogleCloud.storage).to.calledWithExactly({ bucket: 'name', stranger: 'things' });
-        });
-
-
         it('should instantiate a Storage Bucket instance with proper bucket name', function() {
-          expect(storageStub.bucket).to.calledWithExactly('name');
+          expect(GoogleCloudStorage.prototype.bucket).to.calledWithExactly('name');
         });
 
 
@@ -53,13 +45,8 @@ describe('File', function() {
           file = File.create('gs://bucket-name/object/path/and/name.json.gz');
         });
 
-        it('should instantiate a Storage instance with proper config', function() {
-          expect(GoogleCloud.storage).to.calledWithExactly({ bucket: 'name', stranger: 'things' });
-        });
-
-
         it('should instantiate a Storage Bucket instance with proper bucket name', function() {
-          expect(storageStub.bucket).to.calledWithExactly('bucket-name');
+          expect(GoogleCloudStorage.prototype.bucket).to.calledWithExactly('bucket-name');
         });
 
 
@@ -76,18 +63,6 @@ describe('File', function() {
 
 
     context('projectId is specified', function() {
-      context('when called with a fully qualified GCS resource name', function() {
-        beforeEach(function() {
-          file = File.create('gs://bucket-name/object/path/and/name.json.gz', 'differentProjectId');
-        });
-
-        it('should instantiate a Storage instance with proper config', function() {
-          expect(GoogleCloud.storage)
-            .to.calledWithExactly({ projectId: 'differentProjectId', bucket: 'name', stranger: 'things' });
-        });
-      });
-
-
       context('when called with file name (and path)', function() {
         it('throws exception', function() {
           expect(function() { File.create('path/to/file.ext', 'differentProjectId'); }).to.throw(FileError);
