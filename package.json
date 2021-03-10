@@ -2,7 +2,7 @@
   "name": "@emartech/google-cloud-storage",
   "description": "Helper library to easily use Google BigQuery in NodeJS",
   "engines": {
-    "node": "8.9.1"
+    "node": "14"
   },
   "main": "src/index.js",
   "scripts": {
@@ -26,28 +26,27 @@
   ],
   "homepage": "https://github.com/emartech/google-cloud-storage-js",
   "peerDependencies": {
-    "config": "^1.31.0"
+    "config": "^3.0.0"
   },
   "devDependencies": {
-    "chai": "4.1.2",
-    "config": "1.31.0",
-    "co-mocha": "1.2.2",
-    "eslint": "5.2.0",
+    "chai": "4.3.3",
+    "config": "3.3.6",
+    "eslint": "7.21.0",
     "eslint-config-emarsys": "5.1.0",
-    "eslint-plugin-no-only-tests": "2.0.1",
+    "eslint-plugin-no-only-tests": "2.4.0",
     "eslint-plugin-require-path-exists": "1.1.9",
     "eslint-plugin-security": "1.4.0",
     "from2": "2.3.0",
     "from2-array": "0.0.4",
-    "mocha": "5.2.0",
+    "mocha": "8.3.1",
     "pre-commit": "1.2.2",
-    "semantic-release": "15.8.1",
-    "sinon": "6.1.4",
-    "sinon-chai": "3.2.0",
+    "semantic-release": "17.4.1",
+    "sinon": "9.2.4",
+    "sinon-chai": "3.5.0",
     "validate-commit-message": "3.0.1"
   },
   "version": "0.0.0-development",
   "dependencies": {
-    "@google-cloud/storage": "^1.7.0"
+    "@google-cloud/storage": "5.8.1"
   }
 }

@@ -4,7 +4,7 @@ const FileError = require('./error');
 
 process.env.SUPPRESS_NO_CONFIG_WARNING = 'y';
 
-const GoogleCloudStorage = require('@google-cloud/storage');
+const Storage = require('@google-cloud/storage').Storage;
 const config = require('config');
 
 const GCS_URI_REGEXP = /^gs:\/\/([a-z0-9_.\-]+)\/(.+)$/;
@@ -20,7 +20,7 @@ class File {
       googleCloudConfig.projectId = projectId;
       overrideDefaultProjectId = true;
     }
-    const storage = new GoogleCloudStorage(googleCloudConfig);
+    const storage = new Storage(googleCloudConfig);
     const { bucket, file } = this._parseAsResource(filename);
 
     if (overrideDefaultProjectId && !bucket) {

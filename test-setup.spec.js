@@ -3,7 +3,6 @@
 process.env.SUPPRESS_NO_CONFIG_WARNING = 'y';
 const config = require('config');
 
-require('co-mocha');
 const sinon = require('sinon');
 
 const chai = require('chai');

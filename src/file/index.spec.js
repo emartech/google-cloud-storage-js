@@ -1,6 +1,6 @@
 'use strict';
 
-const GoogleCloudStorage = require('@google-cloud/storage');
+const Storage = require('@google-cloud/storage').Storage;
 const File = require('./index');
 const FileError = require('./error');
 
@@ -11,7 +11,7 @@ describe('File', function() {
   beforeEach(function() {
     bucketStub = { file: this.sandbox.stub().returns('[gcs file]') };
 
-    this.sandbox.stub(GoogleCloudStorage.prototype, 'bucket').returns(bucketStub);
+    this.sandbox.stub(Storage.prototype, 'bucket').returns(bucketStub);
   });
 
 
@@ -25,7 +25,7 @@ describe('File', function() {
         });
 
         it('should instantiate a Storage Bucket instance with proper bucket name', function() {
-          expect(GoogleCloudStorage.prototype.bucket).to.calledWithExactly('name');
+          expect(Storage.prototype.bucket).to.calledWithExactly('name');
         });
 
 
@@ -46,7 +46,7 @@ describe('File', function() {
         });
 
         it('should instantiate a Storage Bucket instance with proper bucket name', function() {
-          expect(GoogleCloudStorage.prototype.bucket).to.calledWithExactly('bucket-name');
+          expect(Storage.prototype.bucket).to.calledWithExactly('bucket-name');
         });
 
 
