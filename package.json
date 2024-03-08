@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "chai": "4.3.4",
-    "config": "3.3.6",
+    "config": "3.3.11",
     "eslint": "7.26.0",
     "eslint-config-emarsys": "5.1.0",
     "eslint-plugin-no-only-tests": "2.6.0",
@@ -42,11 +42,11 @@
     "pre-commit": "1.2.2",
     "semantic-release": "17.4.3",
     "sinon": "10.0.0",
-    "sinon-chai": "3.6.0",
+    "sinon-chai": "3.7.0",
     "validate-commit-message": "3.2.0"
   },
   "version": "0.0.0-development",
   "dependencies": {
-    "@google-cloud/storage": "5.8.5"
+    "@google-cloud/storage": "5.20.5"
   }
 }
